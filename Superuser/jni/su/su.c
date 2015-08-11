@@ -433,6 +433,7 @@ static void usage(int status) {
     "Options:\n"
     "  --daemon                      start the su daemon agent\n"
     "  -c, --command COMMAND         pass COMMAND to the invoked shell\n"
+    "  --context context             Change SELinux context\n"
     "  -h, --help                    display this help message and exit\n"
     "  -, -l, --login                pretend the shell to be a login shell\n"
     "  -m, -p,\n"
@@ -654,6 +655,7 @@ int su_main(int argc, char *argv[], int need_client) {
             .keepenv = 0,
             .shell = NULL,
             .command = NULL,
+            .context = NULL,
             .argv = argv,
             .argc = argc,
             .optind = 0,
@@ -677,10 +679,11 @@ int su_main(int argc, char *argv[], int need_client) {
         { "preserve-environment",    no_argument,        NULL, 'p' },
         { "shell",            required_argument,    NULL, 's' },
         { "version",            no_argument,        NULL, 'v' },
+        { "context",            required_argument,        NULL, 'z' },
         { NULL, 0, NULL, 0 },
     };
 
-    while ((c = getopt_long(argc, argv, "+c:hlmps:Vvu", long_opts, NULL)) != -1) {
+    while ((c = getopt_long(argc, argv, "+c:hlmps:Vvuz:", long_opts, NULL)) != -1) {
         switch(c) {
         case 'c':
             ctx.to.shell = DEFAULT_SHELL;
@@ -721,6 +724,9 @@ int su_main(int argc, char *argv[], int need_client) {
                 break;
             }
             exit(EXIT_SUCCESS);
+        case 'z':
+            ctx.to.context = optarg;
+            break;
         default:
             /* Bionic getopt_long doesn't terminate its error output by newline */
             fprintf(stderr, "\n");
