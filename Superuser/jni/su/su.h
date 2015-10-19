@@ -71,6 +71,8 @@
 #define REQUESTOR_DATABASE_PATH REQUESTOR "/databases/su.sqlite"
 #define REQUESTOR_MULTIUSER_MODE REQUESTOR_FILES_PATH "/multiuser_mode"
 
+#define DAEMON_SOCKET_PATH "/dev/socket/su-daemon/"
+
 #define DEFAULT_SHELL "/system/bin/sh"
 
 #define xstr(a) str(a)

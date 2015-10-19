@@ -14,13 +14,8 @@ import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.WritableByteChannel;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpUriRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import android.net.http.AndroidHttpClient;
 
 public class StreamUtility {
  //private static final String LOGTAG = StreamUtility.class.getSimpleName();
@@ -51,6 +46,7 @@ public class StreamUtility {
         fastChannelCopy(inputChannel, outputChannel);
     }
 
+    /*
     public static String downloadUriAsString(String uri) throws IOException {
         HttpGet get = new HttpGet(uri);
         return downloadUriAsString(get);
@@ -75,6 +71,7 @@ public class StreamUtility {
     public static JSONObject downloadUriAsJSONObject(HttpUriRequest req) throws IOException, JSONException {
         return new JSONObject(downloadUriAsString(req));
     }
+    */
 
     public static byte[] readToEndAsArray(InputStream input) throws IOException
     {

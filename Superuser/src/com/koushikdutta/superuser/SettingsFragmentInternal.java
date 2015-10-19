@@ -127,7 +127,8 @@ public class SettingsFragmentInternal extends BetterListFragmentInternal {
         // NOTE to future koush
         // dark icons use the color #f3f3f3
 
-        addItem(R.string.security, new ListItem(this, R.string.superuser_access, 0, 0) {
+        // FIXME: Changing this option seems to break su
+        /*addItem(R.string.security, new ListItem(this, R.string.superuser_access, 0, 0) {
             void update() {
                 switch (Settings.getSuperuserAccess()) {
                 case Settings.SUPERUSER_ACCESS_ADB_ONLY:
@@ -180,7 +181,7 @@ public class SettingsFragmentInternal extends BetterListFragmentInternal {
                 });
                 builder.create().show();
             }
-        }).setAttrDrawable(R.attr.toggleIcon);
+        }).setAttrDrawable(R.attr.toggleIcon);*/
 
         if (Settings.getMultiuserMode(getActivity()) != Settings.MULTIUSER_MODE_NONE) {
             addItem(R.string.security, new ListItem(this, R.string.multiuser_policy, 0) {
