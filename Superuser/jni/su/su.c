@@ -527,6 +527,12 @@ static __attribute__ ((noreturn)) void allow(struct su_context *ctx) {
             arg0, PARG(0), PARG(1), PARG(2), PARG(3), PARG(4), PARG(5),
             (ctx->to.optind + 6 < ctx->to.argc) ? " ..." : "");
 
+    if(ctx->to.context) {
+        setexeccon(ctx->to.context);
+    } else {
+        setexeccon("u:r:su:s0");
+    }
+
     ctx->to.argv[--argc] = arg0;
     execvp(binary, ctx->to.argv + argc);
     err = errno;
@@ -636,6 +642,8 @@ int main(int argc, char *argv[]) {
 int su_main(int argc, char *argv[], int need_client) {
     // start up in daemon mode if prompted
     if (argc == 2 && strcmp(argv[1], "--daemon") == 0) {
+        //Everything we'll exec will be in su, not su_daemon
+		setexeccon("u:r:su:s0");
         return run_daemon();
     }
 
