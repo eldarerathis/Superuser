@@ -188,6 +188,11 @@ void exec_log(int priority, const char* fmt, ...);
 #define LOG_NDEBUG 1
 #endif
 
+void hacks_init();
+void hacks_update_context(struct su_context* ctxt);
+
+// fallback to using /system/bin/log.
+// can't use liblog.so because this is a static binary.
 #ifndef LOGE
 #define LOGE(fmt,args...) exec_log(ANDROID_LOG_ERROR, fmt, ##args)
 #endif
