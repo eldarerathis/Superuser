@@ -12,16 +12,16 @@ enum {
 static struct {
 	const char *package;
 	int flags;
-	int uid;
+	unsigned int uid;
 } apps_list[] = {
-	{ "com.keramidas.TitaniumBackup", H_NO_CONTEXT, },
+	{ "com.keramidas.TitaniumBackup", H_NO_CONTEXT, 0 },
 };
 
 void hacks_init() {
 	char oldCwd[512];
 	getcwd(oldCwd, sizeof(oldCwd));
 	chdir("/data/data");
-	for(int i=0; i<(sizeof(apps_list)/sizeof(apps_list[0])); ++i) {
+	for(unsigned int i=0; i<(sizeof(apps_list)/sizeof(apps_list[0])); ++i) {
 		struct stat st_buf;
 		int ret = stat(apps_list[i].package, &st_buf);
 		LOGW("hacks: Testing (%s:%d:%d)", apps_list[i].package, ret, st_buf.st_uid);
@@ -32,7 +32,7 @@ void hacks_init() {
 }
 
 void hacks_update_context(struct su_context* ctxt) {
-	for(int i=0; i<(sizeof(apps_list)/sizeof(apps_list[0])); ++i) {
+	for(unsigned int i=0; i<(sizeof(apps_list)/sizeof(apps_list[0])); ++i) {
 		LOGW("hacks: Testing (%s:%d), %d", apps_list[i].package, ctxt->from.uid);
 		if(apps_list[i].uid != ctxt->from.uid)
 			continue;

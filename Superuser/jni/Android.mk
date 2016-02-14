@@ -1,4 +1,6 @@
-LOCAL_PATH := $(call my-dir)
+MY_PATH := $(call my-dir)
+LOCAL_PATH := $(MY_PATH)
+
 
 include $(CLEAR_VARS)
 
@@ -28,5 +30,5 @@ LOCAL_SRC_FILES := sqlite3/sqlite3.c
 LOCAL_CFLAGS := -DSQLITE_OMIT_LOAD_EXTENSION
 include $(BUILD_STATIC_LIBRARY)
 
-include $(my_path)/libselinux/Android.mk
-include $(my_path)/libsepol/Android.mk
+include $(MY_PATH)/libselinux/Android.mk
+include $(MY_PATH)/libsepol/Android.mk
