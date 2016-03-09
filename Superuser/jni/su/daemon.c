@@ -532,7 +532,7 @@ err:
 // List of signals which cause process termination
 static int quit_signals[] = { SIGALRM, SIGHUP, SIGPIPE, SIGQUIT, SIGTERM, SIGINT, 0 };
 
-static void sighandler(int sig) {
+static void sighandler() {
     restore_stdin();
 
     // Assume we'll only be called before death
